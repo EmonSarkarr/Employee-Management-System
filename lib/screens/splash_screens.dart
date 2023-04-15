@@ -15,7 +15,15 @@ class _SplashScreenState extends State<SplashScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: const [
-         Center(child: Text("MAYA IT",style: TextStyle(fontSize: 40,fontWeight: FontWeight.bold),))
+          Center(
+              child: Text(
+            "MAYA IT",
+            style: TextStyle(
+              color: Colors.green,
+              fontSize: 40,
+              fontWeight: FontWeight.bold,
+            ),
+          ))
         ],
       ),
     );
