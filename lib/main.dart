@@ -1,3 +1,4 @@
+import 'package:employee_management_system/screens/add_employee_page.dart';
 import 'package:employee_management_system/screens/employee_page.dart';
 import 'package:employee_management_system/screens/splash_screens.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: const EmployeePage()
+      initialRoute: EmployeePage.nameRouting,
+      routes: {
+        EmployeePage.nameRouting : (context) => EmployeePage(),
+        AddEmployeePage.nameRouting : (context) => AddEmployeePage(),
+
+      },
     );
   }
 }
