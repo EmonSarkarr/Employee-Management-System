@@ -1,4 +1,5 @@
 import 'package:employee_management_system/screens/add_employee_page.dart';
+import 'package:employee_management_system/screens/employee_details_page.dart';
 import 'package:employee_management_system/screens/employee_page.dart';
 import 'package:employee_management_system/screens/splash_screens.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
       routes: {
         EmployeePage.nameRouting : (context) => EmployeePage(),
         AddEmployeePage.nameRouting : (context) => AddEmployeePage(),
+        EmployeeDetailsPage.nameRouting : (context) => EmployeeDetailsPage(),
 
       },
     );

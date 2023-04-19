@@ -1,4 +1,7 @@
+import 'package:employee_management_system/models/employee_model.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:employee_management_system/helper_function/snakbar.dart';
 
 class AddEmployeePage extends StatefulWidget {
   static const nameRouting = "/addEmployeePage";
@@ -16,25 +19,29 @@ class _AddEmployeePageState extends State<AddEmployeePage> {
   final salaryController = TextEditingController();
   final addressController = TextEditingController();
   final designationController = TextEditingController();
-
-
-
+  String? dob;
+  String? image;
 
   @override
   void dispose() {
-  nameController.dispose();
-  emailController.dispose();
-  phoneNumberController.dispose();
-  salaryController.dispose();
-  addressController.dispose();
-  designationController.dispose();
+    nameController.dispose();
+    emailController.dispose();
+    phoneNumberController.dispose();
+    salaryController.dispose();
+    addressController.dispose();
+    designationController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Add New Employee"), centerTitle: true),
+      appBar: AppBar(
+          title: const Text("Add New Employee"),
+          centerTitle: true,
+          actions: [
+            IconButton(onPressed: _saveEmployee, icon: const Icon(Icons.save)),
+          ]),
       body: ListView(
         children: [
           Padding(
@@ -55,7 +62,6 @@ class _AddEmployeePageState extends State<AddEmployeePage> {
           const SizedBox(
             height: 10,
           ),
-
           Padding(
             padding: const EdgeInsets.all(12.0),
             child: TextField(
@@ -71,7 +77,9 @@ class _AddEmployeePageState extends State<AddEmployeePage> {
                   labelText: "Email"),
             ),
           ),
-          const SizedBox(height: 10,),
+          const SizedBox(
+            height: 10,
+          ),
           Padding(
             padding: const EdgeInsets.all(12.0),
             child: TextField(
@@ -87,8 +95,9 @@ class _AddEmployeePageState extends State<AddEmployeePage> {
                   labelText: "Phone"),
             ),
           ),
-          const SizedBox(height: 10,),
-
+          const SizedBox(
+            height: 10,
+          ),
           Padding(
             padding: const EdgeInsets.all(12.0),
             child: TextField(
@@ -104,7 +113,9 @@ class _AddEmployeePageState extends State<AddEmployeePage> {
                   labelText: "Salary"),
             ),
           ),
-          const SizedBox(height: 10,),
+          const SizedBox(
+            height: 10,
+          ),
           Padding(
             padding: const EdgeInsets.all(12.0),
             child: TextField(
@@ -120,7 +131,9 @@ class _AddEmployeePageState extends State<AddEmployeePage> {
                   labelText: "Designation"),
             ),
           ),
-          const SizedBox(height: 10,),
+          const SizedBox(
+            height: 10,
+          ),
           Padding(
             padding: const EdgeInsets.all(12.0),
             child: TextField(
@@ -136,30 +149,108 @@ class _AddEmployeePageState extends State<AddEmployeePage> {
                   labelText: "Address"),
             ),
           ),
-          const SizedBox(height: 10,),
-
+          const SizedBox(
+            height: 10,
+          ),
           Row(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              TextButton(onPressed: (){},
-                  child: const Text("Choose a date") ),
-              Chip(label: Text("18/04/2023"))
+              TextButton(
+                  onPressed: selectDate, child: const Text("Choose a date")),
+              Chip(label: Text(dob == null ? "No Date choosen" : dob!))
             ],
           ),
-
-          const SizedBox(height: 10,),
-          Row(
+          const SizedBox(
+            height: 10,
+          ),
+          Column(
             mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-
+              Card(
+                elevation: 50,
+                child: Image.asset(
+                  "images/person.jpg",
+                  height: 150,
+                  width: 150,
+                ),
+              ),
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  TextButton.icon(
+                    onPressed: () {},
+                    label: const Text("Choose from camera"),
+                    icon: const Icon(Icons.camera),
+                  ),
+                  TextButton.icon(
+                    onPressed: () {},
+                    label: const Text("Choose from gallery"),
+                    icon: const Icon(Icons.browse_gallery),
+                  )
+                ],
+              )
             ],
           ),
-
-
+          Padding(
+            padding: const EdgeInsets.all(30.0),
+            child: ElevatedButton(onPressed: () {}, child: Text("SAVE")),
+          ),
         ],
       ),
     );
+  }
+
+  void selectDate() async {
+    DateTime? selectedDate = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(1971),
+        lastDate: DateTime.now());
+    if (selectedDate != null) {
+      setState(() {
+        dob = DateFormat("DD/MM/YYYY").format(selectedDate);
+      });
+    }
+  }
+
+  void _saveEmployee() {
+    if (nameController.text.isEmpty) {
+      showSnackbar(context, "Please fill up your name");
+      return;
+    }
+    ;
+    if (emailController.text.isEmpty) {
+      showSnackbar(context, "please provide a Email");
+    }
+    ;
+    if (phoneNumberController.text.isEmpty) {
+      showSnackbar(context, "please provide a PhoneNumer");
+    }
+    ;
+    if (salaryController.text.isEmpty) {
+      showSnackbar(context, "please provide salary");
+    }
+    ;
+    if (designationController.text.isEmpty) {
+      showSnackbar(context, "please provide salary");
+    }
+    ;
+    if (addressController.text.isEmpty) {
+      showSnackbar(context, "please provide a address");
+    }
+    ;
+
+    final employeeModel = EmployeeModel(
+        name: nameController.text,
+        email: emailController.text,
+        phoneNumber: int.parse(phoneNumberController.text),
+        salary: double.parse(salaryController.text),
+        address: addressController.text,
+        designation: designationController.text);
+
+    empList.add(employeeModel);
+    Navigator.pop(context);
   }
 }

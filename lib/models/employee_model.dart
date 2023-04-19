@@ -1,11 +1,11 @@
-class EmployeeModel {
+ class EmployeeModel {
   String? empId;
   String name;
   String email;
-  String phoneNumber;
-  String dob;
+  int phoneNumber;
+  String? dob;
   double salary;
-  String image;
+  String? image;
   String address;
   String designation;
 
@@ -14,14 +14,28 @@ class EmployeeModel {
       required this.name,
       required this.email,
       required this.phoneNumber,
-      required this.dob,
+      this.dob,
       required this.salary,
-      required this.image,
+      this.image,
       required this.address,
       required this.designation});
 
-  @override
-  String toString() {
-    return 'EmployeeModel{empId: $empId, name: $name, email: $email, phoneNumber: $phoneNumber, dob: $dob, salary: $salary, image: $image, address: $address, designation: $designation}';
-  }
+
 }
+
+ final  List<EmployeeModel> empList = [
+   EmployeeModel(
+       name: "EMON",
+       email: "emongmail.com",
+       phoneNumber: 01723315828,
+       salary: 1000,
+       address: "Nillphamari",
+       designation: "Developer"),
+   EmployeeModel(
+       name: "MON",
+       email: 'mongmail.com',
+       phoneNumber: 01716048324,
+       salary: 5000,
+       address: "Nillphamari",
+       designation: "CEO")
+ ];
