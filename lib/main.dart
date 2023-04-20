@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -19,14 +20,13 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      initialRoute: EmployeePage.nameRouting,
+      initialRoute: SplashScreen.nameRouting,
       routes: {
-        EmployeePage.nameRouting : (context) => EmployeePage(),
-        AddEmployeePage.nameRouting : (context) => AddEmployeePage(),
-        EmployeeDetailsPage.nameRouting : (context) => EmployeeDetailsPage(),
-
+        SplashScreen.nameRouting: (context) => SplashScreen(),
+        EmployeePage.nameRouting: (context) => EmployeePage(),
+        AddEmployeePage.nameRouting: (context) => AddEmployeePage(),
+        EmployeeDetailsPage.nameRouting: (context) => EmployeeDetailsPage(),
       },
     );
   }
 }
-
