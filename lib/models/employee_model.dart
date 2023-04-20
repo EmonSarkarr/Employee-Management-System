@@ -1,4 +1,4 @@
- class EmployeeModel {
+class EmployeeModel {
   String? empId;
   String name;
   String email;
@@ -19,23 +19,28 @@
       this.image,
       required this.address,
       required this.designation});
-
-
 }
 
- final  List<EmployeeModel> empList = [
-   EmployeeModel(
-       name: "EMON",
-       email: "emongmail.com",
-       phoneNumber: 01723315828,
-       salary: 1000,
-       address: "Nillphamari",
-       designation: "Developer"),
-   EmployeeModel(
-       name: "MON",
-       email: 'mongmail.com',
-       phoneNumber: 01716048324,
-       salary: 5000,
-       address: "Nillphamari",
-       designation: "CEO")
- ];
+final List<EmployeeModel> empList = [
+  EmployeeModel(
+      name: "EMON",
+      email: "emongmail.com",
+      phoneNumber: 01723315828,
+      salary: 1000,
+      address: "Nillphamari",
+      designation: "Developer"),
+  EmployeeModel(
+      name: "MON",
+      email: 'mongmail.com',
+      phoneNumber: 01716048324,
+      salary: 5000,
+      address: "Nillphamari",
+      designation: "CEO"),
+  EmployeeModel(
+      name: "Mosfiqur Rahman",
+      email: "mosfiqurrahmanGmail.com",
+      phoneNumber: 0172222,
+      salary: 111,
+      address: "dhaka",
+      designation: "Flutter Developer")
+];

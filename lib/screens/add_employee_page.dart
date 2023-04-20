@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:employee_management_system/models/employee_model.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:employee_management_system/helper_function/snakbar.dart';
 
@@ -20,7 +23,8 @@ class _AddEmployeePageState extends State<AddEmployeePage> {
   final addressController = TextEditingController();
   final designationController = TextEditingController();
   String? dob;
-  String? image;
+  String? imagePath;
+  ImageSource imageSource = ImageSource.camera;
 
   @override
   void dispose() {
@@ -168,24 +172,38 @@ class _AddEmployeePageState extends State<AddEmployeePage> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Card(
-                elevation: 50,
-                child: Image.asset(
-                  "images/person.jpg",
-                  height: 150,
-                  width: 150,
-                ),
-              ),
+                  elevation: 50,
+                  child: imagePath == null
+                      ? Image.asset(
+                          "images/person.jpg",
+                          height: 150,
+                          width: 150,
+                          fit: BoxFit.cover,
+                        )
+                      : Image.file(
+                          File(imagePath!),
+                          height: 200,
+                          width: 200,
+                          fit: BoxFit.cover,
+                        )),
               Row(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   TextButton.icon(
-                    onPressed: () {},
+                    onPressed: () {
+                      imageSource = ImageSource.camera;
+                      getImage();
+                    },
                     label: const Text("Choose from camera"),
                     icon: const Icon(Icons.camera),
                   ),
                   TextButton.icon(
-                    onPressed: () {},
+                    onPressed: () {
+                      imageSource = ImageSource.gallery;
+
+                      getImage();
+                    },
                     label: const Text("Choose from gallery"),
                     icon: const Icon(Icons.browse_gallery),
                   )
@@ -210,7 +228,7 @@ class _AddEmployeePageState extends State<AddEmployeePage> {
         lastDate: DateTime.now());
     if (selectedDate != null) {
       setState(() {
-        dob = DateFormat("DD/MM/YYYY").format(selectedDate);
+        dob = DateFormat("dd/MM/yyyy").format(selectedDate);
       });
     }
   }
@@ -245,6 +263,8 @@ class _AddEmployeePageState extends State<AddEmployeePage> {
     final employeeModel = EmployeeModel(
         name: nameController.text,
         email: emailController.text,
+        image: imagePath!,
+        dob: dob!,
         phoneNumber: int.parse(phoneNumberController.text),
         salary: double.parse(salaryController.text),
         address: addressController.text,
@@ -252,5 +272,14 @@ class _AddEmployeePageState extends State<AddEmployeePage> {
 
     empList.add(employeeModel);
     Navigator.pop(context);
+  }
+
+  void getImage() async {
+    final selectedImage = await ImagePicker().pickImage(source: imageSource);
+    if (selectedImage != null) {
+      setState(() {
+        imagePath = selectedImage.path;
+      });
+    }
   }
 }
