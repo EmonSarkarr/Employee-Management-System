@@ -30,7 +30,13 @@ class _EmployeePageState extends State<EmployeePage> {
             final emp = empList[index];
             return Padding(
               padding: const EdgeInsets.all(8.0),
+
               child: ListTile(
+                  shape: const OutlineInputBorder(
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(20),
+                          topRight: Radius.circular(20))),
+
                 title: Text(emp.name),
                 subtitle: Text(emp.email),
                 trailing: Text("$index"),

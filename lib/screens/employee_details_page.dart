@@ -81,7 +81,7 @@ class _EmployeeDetailsPageState extends State<EmployeeDetailsPage> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ListTile(
-                      contentPadding: EdgeInsets.all(15),
+                      contentPadding:const EdgeInsets.all(15),
                       onTap: () {},
                       shape: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20)),
